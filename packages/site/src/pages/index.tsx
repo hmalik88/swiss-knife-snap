@@ -114,6 +114,30 @@ const Index = () => {
     await invokeSnap({ method: 'hello' });
   };
 
+  const handleInstallSnap = async () => {
+    await invokeSnap({ method: 'installSnap' });
+  };
+
+  const handleSendNormalNotification = async () => {
+    await invokeSnap({ method: 'limitnotif' });
+  };
+
+  const handleSendLongNotification = async () => {
+    await invokeSnap({ method: 'overlimitnotif' });
+  };
+
+  const handleSendJSXNotification = async () => {
+    await invokeSnap({ method: 'jsxnotif' });
+  };
+
+  const handleSignMessage = async () => {
+    await invokeSnap({ method: 'sign' });
+  };
+
+  const handleDisplayDeepLink = async () => {
+    await invokeSnap({ method: 'exampleUI' });
+  };
+
   return (
     <Container>
       <Heading>
@@ -179,6 +203,116 @@ const Index = () => {
             button: (
               <SendHelloButton
                 onClick={handleSendHelloClick}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Install the BIP44 example snap',
+            description: 'Install the BIP44 example snap',
+            button: (
+              <SendHelloButton
+                onClick={handleInstallSnap}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Send a long notification',
+            description: 'Send a long in app notification',
+            button: (
+              <SendHelloButton
+                onClick={handleSendLongNotification}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Send a within limit notification',
+            description:
+              'Send an in app notification that is within the char limit',
+            button: (
+              <SendHelloButton
+                onClick={handleSendNormalNotification}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Send a JSX notification',
+            description:
+              'Send a notification with an expanded view displaying JSX content',
+            button: (
+              <SendHelloButton
+                onClick={handleSendJSXNotification}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Sign a message',
+            description: 'Use personal_sign to sign a "RANDOM" message',
+            button: (
+              <SendHelloButton
+                onClick={handleSignMessage}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Navigate',
+            description: 'Deep link to the extension page',
+            button: (
+              <SendHelloButton
+                onClick={handleDisplayDeepLink}
                 disabled={!installedSnap}
               />
             ),

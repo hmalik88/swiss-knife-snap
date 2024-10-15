@@ -7,7 +7,7 @@
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "ufQns74hTklAsDcCm5Yd3qVw4iMs82eARCnn6IARlYE=",
+    "shasum": "q7qUWrawJTaw1G/4C6CsMXYtCN/uXV0l47JDjiukWZc=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,9 +18,21 @@
   },
   "initialPermissions": {
     "snap_dialog": {},
+    "snap_notify": {},
     "endowment:rpc": {
       "dapps": true,
       "snaps": false
+    },
+    "endowment:ethereum-provider": {},
+    "endowment:name-lookup": {
+      "chains": [
+        "eip155:1"
+      ],
+      "matchers": {
+        "tlds": [
+          "bar"
+        ]
+      }
     }
   },
   "manifestVersion": "0.1"
