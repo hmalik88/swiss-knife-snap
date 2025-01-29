@@ -134,8 +134,16 @@ const Index = () => {
     await invokeSnap({ method: 'sign' });
   };
 
-  const handleDisplayDeepLink = async () => {
+  const handleDisplayLongContent = async () => {
     await invokeSnap({ method: 'exampleUI' });
+  };
+
+  const handleTestMetaMaskLink = async () => {
+    await invokeSnap({ method: 'testMetaMaskLink' });
+  };
+
+  const handleGetContext = async () => {
+    await invokeSnap({ method: 'getContext' });
   };
 
   return (
@@ -308,11 +316,11 @@ const Index = () => {
         />
         <Card
           content={{
-            title: 'Navigate',
-            description: 'Deep link to the extension page',
+            title: 'Trigger long content',
+            description: 'Trigger custom ui content that is scrollable',
             button: (
               <SendHelloButton
-                onClick={handleDisplayDeepLink}
+                onClick={handleDisplayLongContent}
                 disabled={!installedSnap}
               />
             ),
@@ -323,6 +331,37 @@ const Index = () => {
             Boolean(installedSnap) &&
             !shouldDisplayReconnectButton(installedSnap)
           }
+        />
+        <Card
+          content={{
+            title: 'Get interface context',
+            description: 'Get some context',
+            button: (
+              <SendHelloButton
+                onClick={handleGetContext}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Test MetaMask Link',
+            description: 'Test MetaMask Link',
+            button: (
+              <SendHelloButton
+                onClick={handleTestMetaMaskLink}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
         />
         <Notice>
           <p>

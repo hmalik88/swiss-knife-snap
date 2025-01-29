@@ -8,7 +8,9 @@ import {
   Row,
   Address,
   Button,
-  Icon,
+  Text,
+  Footer,
+  Container,
   Link,
 } from '@metamask/snaps-sdk/jsx';
 
@@ -83,7 +85,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         params: {
           type: 'inApp',
           message:
-            'This is an important notification, you should open this in a detailed view',
+            'This is an important notification, you should open this in a detailed view [Foo](metamask://client/)',
           content: (
             <Box>
               <Row
@@ -108,19 +110,75 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       });
     case 'sign':
       return await executeSign();
+
+    case 'getContext':
+      const interfaceId = await snap.request({
+        method: "snap_createInterface",
+        params: {
+          ui: ( 
+            <Box>
+              <Button name="interactive-button">Click me</Button>
+            </Box>
+          ),
+          context: { foo: 'bar' },
+        },
+      });
+
+      const context = snap.request({
+        method: 'snap_getInterfaceContext',
+        params: {
+          id: interfaceId,
+        },
+      });
+
+      console.log(context);
+      return context;
     case 'exampleUI':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          content: (
+            <Container>
+              <Box direction="vertical">
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+              </Box>
+              <Footer requireScroll>
+                <Button name="reject">Reject</Button>
+                <Button name="accept">Yes</Button>
+              </Footer>
+            </Container>
+          ),
+        },
+      });
+    case 'testMetaMaskLink':
       return snap.request({
         method: 'snap_dialog',
         params: {
           type: 'alert',
           content: (
-            <Box direction="horizontal" alignment="space-between">
-              <Button name="back">
-                <Link href="metamask://client/">
-                  <Icon name="arrow-left" color="primary" size="md" />
-                </Link>
-              </Button>
-            </Box>
+            <Container>
+              <Box direction="vertical">
+                <Text>Would you like to visit MetaMask's home screen?</Text>
+                <Link href="metamask://client/">Click here to go home</Link>
+              </Box>
+            </Container>
           ),
         },
       });
