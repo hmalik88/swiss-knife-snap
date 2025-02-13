@@ -143,21 +143,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
                 <Text>First text that wraps so we can see the alignment</Text>
                 <Text>Second text that wraps so we can see the alignment</Text>
                 <Text>Third text that wraps so we can see the alignment</Text>
-                <Text>First text that wraps so we can see the alignment</Text>
-                <Text>Second text that wraps so we can see the alignment</Text>
-                <Text>Third text that wraps so we can see the alignment</Text>
-                <Text>First text that wraps so we can see the alignment</Text>
-                <Text>Second text that wraps so we can see the alignment</Text>
-                <Text>Third text that wraps so we can see the alignment</Text>
-                <Text>First text that wraps so we can see the alignment</Text>
-                <Text>Second text that wraps so we can see the alignment</Text>
-                <Text>Third text that wraps so we can see the alignment</Text>
-                <Text>First text that wraps so we can see the alignment</Text>
-                <Text>Second text that wraps so we can see the alignment</Text>
-                <Text>Third text that wraps so we can see the alignment</Text>
-                <Text>First text that wraps so we can see the alignment</Text>
-                <Text>Second text that wraps so we can see the alignment</Text>
-                <Text>Third text that wraps so we can see the alignment</Text>
               </Box>
               <Footer requireScroll>
                 <Button name="reject">Reject</Button>
@@ -167,7 +152,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
           ),
         },
       });
-    case 'testMetaMaskLink':
+    case 'testMetaMaskHomeLink':
       return snap.request({
         method: 'snap_dialog',
         params: {
@@ -175,12 +160,35 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
           content: (
             <Container>
               <Box direction="vertical">
-                <Text>Would you like to visit MetaMask's home screen?</Text>
+                <Text>
+                  Would you like to visit this MetaMask's home screen?
+                </Text>
                 <Link href="metamask://client/">Click here to go home</Link>
               </Box>
             </Container>
           ),
         },
+      });
+    case 'testMetaMaskSnapLink':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          type: 'alert',
+          content: (
+            <Container>
+              <Box direction="vertical">
+                <Text>Would you like to visit this snap's home screen?</Text>
+                <Link href="metamask://snap/local:http://localhost:8080/home">
+                  Click here to go home
+                </Link>
+              </Box>
+            </Container>
+          ),
+        },
+      });
+    case 'getPreferences':
+      return snap.request({
+        method: 'snap_getPreferences',
       });
     default:
       throw new Error('Method not found.');

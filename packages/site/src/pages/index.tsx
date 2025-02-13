@@ -139,11 +139,20 @@ const Index = () => {
   };
 
   const handleTestMetaMaskLink = async () => {
-    await invokeSnap({ method: 'testMetaMaskLink' });
+    await invokeSnap({ method: 'testMetaMaskHomeLink' });
+  };
+
+  const handleTestMetaMaskSnapLink = async () => {
+    await invokeSnap({ method: 'testMetaMaskSnapLink' });
   };
 
   const handleGetContext = async () => {
     await invokeSnap({ method: 'getContext' });
+  };
+
+  const handleGetPreferences = async () => {
+    const preferences = await invokeSnap({ method: 'getPreferences' });
+    console.log(preferences);
   };
 
   return (
@@ -352,11 +361,37 @@ const Index = () => {
         />
         <Card
           content={{
-            title: 'Test MetaMask Link',
-            description: 'Test MetaMask Link',
+            title: 'Test MetaMask Home Link',
+            description: 'Test MetaMask Home Link',
             button: (
               <SendHelloButton
                 onClick={handleTestMetaMaskLink}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+        />
+        <Card
+          content={{
+            title: 'Test MetaMask Snap Link',
+            description: 'Test MetaMask Snap Link',
+            button: (
+              <SendHelloButton
+                onClick={handleTestMetaMaskSnapLink}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+        />
+        <Card
+          content={{
+            title: 'Get Preferences',
+            description: 'Get Preferences',
+            button: (
+              <SendHelloButton
+                onClick={handleGetPreferences}
                 disabled={!installedSnap}
               />
             ),
