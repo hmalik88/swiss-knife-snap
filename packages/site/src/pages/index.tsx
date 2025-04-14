@@ -134,8 +134,12 @@ const Index = () => {
     await invokeSnap({ method: 'sign' });
   };
 
+  const handleDisplayShortContent = async () => {
+    await invokeSnap({ method: 'shortContent' });
+  };
+
   const handleDisplayLongContent = async () => {
-    await invokeSnap({ method: 'exampleUI' });
+    await invokeSnap({ method: 'longContent' });
   };
 
   const handleTestMetaMaskLink = async () => {
@@ -155,10 +159,22 @@ const Index = () => {
     console.log(preferences);
   };
 
+  const handleTestFooter1 = async () => {
+    await invokeSnap({ method: 'testFooter1' });
+  };
+
+  const handleDisabledAddressInputWithError = async () => {
+    await invokeSnap({ method: 'disabledAddressInputWithError' });
+  };
+
+  const handleDisabledAddressInputWithoutError = async () => {
+    await invokeSnap({ method: 'disabledAddressInputWithoutError' });
+  };
+
   return (
     <Container>
       <Heading>
-        Welcome to <Span>template-snap</Span>
+        Welcome to <Span>🇨🇭🔪🫰</Span>
       </Heading>
       <Subtitle>
         Get started by editing <code>src/index.tsx</code>
@@ -326,10 +342,30 @@ const Index = () => {
         <Card
           content={{
             title: 'Trigger long content',
-            description: 'Trigger custom ui content that is scrollable',
+            description:
+              'Trigger custom ui content that is scrollable with the required scroll prop',
             button: (
               <SendHelloButton
                 onClick={handleDisplayLongContent}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+          fullWidth={
+            isMetaMaskReady &&
+            Boolean(installedSnap) &&
+            !shouldDisplayReconnectButton(installedSnap)
+          }
+        />
+        <Card
+          content={{
+            title: 'Trigger short content',
+            description:
+              'Trigger custom ui content that has required scroll prop but not scrollable',
+            button: (
+              <SendHelloButton
+                onClick={handleDisplayShortContent}
                 disabled={!installedSnap}
               />
             ),
@@ -392,6 +428,45 @@ const Index = () => {
             button: (
               <SendHelloButton
                 onClick={handleGetPreferences}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+        />
+        <Card
+          content={{
+            title: 'Test Footer 1',
+            description: 'Test Footer 1',
+            button: (
+              <SendHelloButton
+                onClick={handleTestFooter1}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+        />
+        <Card
+          content={{
+            title: 'Disabled Address Input with Error',
+            description: 'Disabled Address Input with Error',
+            button: (
+              <SendHelloButton
+                onClick={handleDisabledAddressInputWithError}
+                disabled={!installedSnap}
+              />
+            ),
+          }}
+          disabled={!installedSnap}
+        />
+        <Card
+          content={{
+            title: 'Disabled Address Input without Error',
+            description: 'Disabled Address Input without Error',
+            button: (
+              <SendHelloButton
+                onClick={handleDisabledAddressInputWithoutError}
                 disabled={!installedSnap}
               />
             ),

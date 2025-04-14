@@ -12,6 +12,8 @@ import {
   Footer,
   Container,
   Link,
+  Field,
+  AddressInput,
 } from '@metamask/snaps-sdk/jsx';
 
 const executeSign = async () => {
@@ -133,13 +135,44 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 
       console.log(context);
       return context;
-    case 'exampleUI':
+    case 'shortContent':
       return snap.request({
         method: 'snap_dialog',
         params: {
           content: (
             <Container>
               <Box direction="vertical">
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+              </Box>
+              <Footer requireScroll>
+                <Button name="reject">Reject</Button>
+                <Button name="accept">Yes</Button>
+              </Footer>
+            </Container>
+          ),
+        },
+      });
+    case 'longContent':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          content: (
+            <Container>
+              <Box direction="vertical">
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
                 <Text>First text that wraps so we can see the alignment</Text>
                 <Text>Second text that wraps so we can see the alignment</Text>
                 <Text>Third text that wraps so we can see the alignment</Text>
@@ -186,9 +219,62 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
           ),
         },
       });
+    case 'testFooter1':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          content: (
+            <Container>
+              <Box direction="vertical">
+                <Text>First text that wraps so we can see the alignment</Text>
+                <Text>Second text that wraps so we can see the alignment</Text>
+                <Text>Third text that wraps so we can see the alignment</Text>
+              </Box>
+              <Footer>
+                <Button name="reject" variant="destructive">Reject</Button>
+                <Button name="accept" variant="destructive">Yes</Button>
+              </Footer>
+            </Container>
+          ),
+        },
+      });
     case 'getPreferences':
       return snap.request({
         method: 'snap_getPreferences',
+      });
+    case 'disabledAddressInputWithError':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          content: (
+            <Field label="To account" error="This field is required">
+              <AddressInput
+                name="to"
+                chainId="eip155:0"
+                placeholder="Enter receiving address"
+                disabled={true}
+                value="0x32B12f5D97E48a1Ed5e981cC11b2875151527729"
+              />
+            </Field>
+          ),
+        },
+      });
+    case 'disabledAddressInputWithoutError':
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          content: (
+            <Field label="To account">
+              <AddressInput
+                name="to"
+                chainId="eip155:0"
+                placeholder="Enter receiving address"
+                disabled={true}
+                value="0x32B12f5D97E48a1Ed5e981cC11b2875151527729"
+              />
+            </Field>
+          ),
+        },
       });
     default:
       throw new Error('Method not found.');
